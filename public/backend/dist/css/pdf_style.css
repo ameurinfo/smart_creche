@@ -1,0 +1,35 @@
+body {
+    font-family: 'vazirmatn', serif;
+}
+header, footer {
+    text-align: center;
+    margin: 20px 0;
+}
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+.present {
+    background-color: #d4edda;
+}
+
+.absent {
+    background-color: #f8d7da;
+}
+
+header, footer {
+    text-align: center;
+    margin: 20px 0;
+}
