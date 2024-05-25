@@ -34,7 +34,6 @@
 <script src="{{asset('backend/plugins/jquery/jquery.min.js')}}"></script>
 <script src="https://cdn.rtlcss.com/bootstrap/v4.2.1/js/bootstrap.min.js"></script>
 <script src="{{asset('backend/dist/js/adminlte.js')}}"></script>
-<script src="{{asset('backend/dist/js/adminlte.js')}}"></script>
 @yield('footer')
 </body>
 </html>

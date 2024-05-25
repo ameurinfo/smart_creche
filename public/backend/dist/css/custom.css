@@ -64,3 +64,16 @@
     }
     
 }
+/* Add this to your custom CSS file or inline in your view */
+.text-right {
+    text-align: right !important;
+}
+.icheck-primary {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+.icheck-primary input[type="checkbox"] {
+    margin-right: 5px; /* Adjust as necessary */
+    margin-left: 0;
+}

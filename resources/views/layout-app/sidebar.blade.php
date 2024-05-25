@@ -2,7 +2,7 @@
     <a href="index3.html" class="brand-link">
       <img src="{{asset('backend/dist/img/AdminLTELogo.png')}}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
            style="opacity: .8">
-      <span class="brand-text font-weight-light">AdminLTE 3</span>
+      <span class="brand-text font-weight-light">SMART C</span>
     </a>
     <div class="sidebar">
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
@@ -10,7 +10,7 @@
           <img src="{{asset('backend/dist/img/user2-160x160.jpg')}}" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block">Alexander Pierce</a>
+          <a href="#" class="d-block">admin</a>
         </div>
       </div>
       <nav class="mt-2">
@@ -175,6 +175,35 @@
                 <a href="{{route('attendance.create')}}" class="nav-link {{ $active_supmenu === 'attendance.create' ? 'active' : '' }}">
                   <i class="fa fa-book-open nav-icon"></i>
                   <p>إدارة الرواتب </p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item has-treeview {{ $active_menu === 'users.' ? 'menu-open' : '' }}">
+            <a href="#" class="nav-link {{ $active_menu === 'users.' ? 'active' : '' }}">
+              <i class="nav-icon fas fa-tachometer-alt"></i>
+              <p>
+                إدارة المستخدمين
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{route('users.index')}}" class="nav-link {{ $active_supmenu === 'users.index' ? 'active' : '' }}">
+                  <i class="fa fa-university nav-icon"></i>
+                  <p>معلومات المستخدمين  </p>
+                </a>
+              </li>
+            <li class="nav-item">
+              <a href="{{route('users.create')}}" class="nav-link {{ $active_supmenu === 'users.create' ? 'active' : '' }}">
+                <i class="fas fa-tasks nav-icon"></i>
+                <p> إضافة مستخدم </p>
+              </a>
+            </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link {{ $active_supmenu === 'users.searchedit' ? 'active' : '' }}">
+                  <i class="fa fa-book-open nav-icon"></i>
+                  <p>تعديل حساب </p>
                 </a>
               </li>
             </ul>

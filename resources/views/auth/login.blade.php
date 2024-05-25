@@ -1,0 +1,56 @@
+@extends('layouts.auth')
+
+@section('content')
+<div class="card card-outline card-primary">
+    <div class="card-header text-center">
+        <a href="{{ url('/') }}" class="h1"><b> Smart Creche</b></a>
+    </div>
+    <div class="card-body">
+        <p class="login-box-msg">تسجيل الدخول لبدء جلسة العمل</p>
+
+        <form action="{{ route('login') }}" method="post">
+            @csrf
+            <div class="input-group mb-3">
+                <input type="email" name="email" class="form-control" placeholder="الايميل" value="{{ old('email') }}" required autofocus>
+                <div class="input-group-append">
+                    <div class="input-group-text">
+                        <span class="fas fa-envelope"></span>
+                    </div>
+                </div>
+            </div>
+            @error('email')
+                <div class="alert alert-danger">{{ $message }}</div>
+            @enderror
+            <div class="input-group mb-3">
+                <input type="password" name="password" class="form-control" placeholder="كلمة المرور" required>
+                <div class="input-group-append">
+                    <div class="input-group-text">
+                        <span class="fas fa-lock"></span>
+                    </div>
+                </div>
+            </div>
+            @error('password')
+                <div class="alert alert-danger">{{ $message }}</div>
+            @enderror
+            <div class="row">
+                <div class="col-4">
+                    <button type="submit" class="btn btn-primary btn-block">دخول</button>
+                </div>
+                <div class="col-8 text-right">
+                    <div class="icheck-primary">
+                        <label for="remember">تذكرني</label>
+                        <input type="checkbox" id="remember" name="remember">
+                    </div>
+                </div>
+            </div>
+        </form>
+
+        <p class="mb-1">
+            <a href="{{ route('password.request') }}">نسيت كلمة المرور</a>
+        </p>
+        <p class="mb-0">
+            <a href="{{ route('register') }}" class="text-center">تسجيل عضو جديد</a>
+        </p>
+    </div>
+</div>
+@endsection
