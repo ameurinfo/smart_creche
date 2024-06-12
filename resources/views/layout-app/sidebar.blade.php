@@ -1,5 +1,5 @@
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
-    <a href="index3.html" class="brand-link">
+    <a href="{{route('children.index')}}" class="brand-link">
       <img src="{{asset('backend/dist/img/AdminLTELogo.png')}}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
            style="opacity: .8">
       <span class="brand-text font-weight-light">SMART C</span>
@@ -19,7 +19,7 @@
             <a href="#" class="nav-link {{ $active_menu === 'children.' ? 'active' : '' }}">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
-                إدارة اﻷطفال
+                متابعة اﻷطفال
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
@@ -27,19 +27,19 @@
               <li class="nav-item">
                 <a href="{{route('children.index')}}" class="nav-link {{ $active_supmenu === 'children.index' ? 'active' : '' }}">
                   <i class="fa fa-child nav-icon"></i>
-                  <p>إدارة معلومات اﻷطفال</p>
+                  <p> معلومات اﻷطفال</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="{{route('attendance.create')}}" class="nav-link {{ $active_supmenu === 'attendance.create' ? 'active' : '' }}">
                   <i class="fa fa-list nav-icon"></i>
-                  <p>إدارة الحضور والغياب</p>
+                  <p> الحضور والغياب</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="{{route('attendance.departure')}}" class="nav-link {{ $active_supmenu === 'attendance.departure' ? 'active' : '' }}">
                   <i class="fas fa-door-open nav-icon"></i>
-                  <p>إدارة المغادرة</p>
+                  <p> المغادرة</p>
                 </a>
               </li>
               <li class="nav-item">
@@ -66,7 +66,7 @@
             <a href="#" class="nav-link {{ $active_menu === 'children' ? 'active' : '' }}">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
-                إدارة الصفوف واﻷنشطة
+                 الصفوف واﻷنشطة
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
@@ -74,19 +74,19 @@
             <li class="nav-item">
               <a href="{{route('attendance.departure')}}" class="nav-link {{ $active_supmenu === 'attendance.departure' ? 'active' : '' }}">
                 <i class="fas fa-tasks nav-icon"></i>
-                <p>إدارة اﻷنشطة</p>
+                <p> اﻷنشطة</p>
               </a>
             </li>
               <li class="nav-item">
                 <a href="{{route('children.index')}}" class="nav-link {{ $active_supmenu === 'children.index' ? 'active' : '' }}">
                   <i class="fa fa-university nav-icon"></i>
-                  <p>إدارة الصفوف </p>
+                  <p> الصفوف </p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="{{route('attendance.create')}}" class="nav-link {{ $active_supmenu === 'attendance.create' ? 'active' : '' }}">
                   <i class="fa fa-book-open nav-icon"></i>
-                  <p>إدارة المناهج </p>
+                  <p> المناهج </p>
                 </a>
               </li>
             </ul>
@@ -95,7 +95,7 @@
             <a href="#" class="nav-link {{ $active_menu === 'children' ? 'active' : '' }}">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
-                إدارة الصحة والسلامة
+                 الصحة والسلامة
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
@@ -131,7 +131,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{route('attendance.create')}}" class="nav-link {{ $active_supmenu === 'attendance.create' ? 'active' : '' }}">
+                <a href="{{route('video-chat')}}" class="nav-link {{ $active_supmenu === 'attendance.create' ? 'active' : '' }}">
                   <i class="fa fa-book-open nav-icon"></i>
                   <p>بث مباشر</p>
                 </a>
@@ -142,7 +142,7 @@
             <a href="#" class="nav-link {{ $active_menu === 'staff' ? 'active' : '' }}">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
-                إدارة الموظفين
+                تسيير الموظفين
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
@@ -174,7 +174,7 @@
               <li class="nav-item">
                 <a href="{{route('attendance.create')}}" class="nav-link {{ $active_supmenu === 'attendance.create' ? 'active' : '' }}">
                   <i class="fa fa-book-open nav-icon"></i>
-                  <p>إدارة الرواتب </p>
+                  <p>تسيير الرواتب </p>
                 </a>
               </li>
             </ul>
@@ -183,7 +183,7 @@
             <a href="#" class="nav-link {{ $active_menu === 'users.' ? 'active' : '' }}">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
-                إدارة المستخدمين
+                 المستخدمين
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
