@@ -15,17 +15,19 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->date('birthdate');
-            $table->enum('gender', ['male', 'female']);
+            $table->enum('gender', ['ذكر', 'أنثى']);
             $table->string('address')->nullable();
-            $table->string('phone_number');
+            $table->string('phone_number')->nullable();
             $table->string('email')->unique();
-            $table->string('job_title'); 
-            $table->date('hire_date'); 
-            $table->decimal('salary', 8, 2); 
+            $table->string('job_title')->nullable(); 
+            $table->date('hire_date')->nullable(); 
+            $table->decimal('salary', 8, 2)->nullable(); 
             $table->string('image')->nullable(); 
             $table->text('notes')->nullable(); 
             $table->unsignedBigInteger('job_type_id'); 
             $table->foreign('job_type_id')->references('id')->on('job_types');
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
     }

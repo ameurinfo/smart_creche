@@ -15,6 +15,11 @@
                                 {{ session('success') }}
                             </div>
                         @endif
+                        @if (session('errors'))
+                            <div class="alert alert-danger" role="alert">
+                                {{ session('errors') }}
+                            </div>
+                        @endif
 
                         @if ($attendedStudents->isEmpty())
                             <p>لا يوجد أطفال حاضرين بعد لهذا اليوم.</p>

@@ -24,10 +24,16 @@ class Staff extends Model
         'image',
         'notes',
         'job_type_id',
+        'user_id',
     ];
 
     public function jobTypes()
     {
         return $this->belongsTo(JobType::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }

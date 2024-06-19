@@ -32,8 +32,8 @@
                                             <div class="form-group">
                                                 <label for="gender">الجنس</label>
                                                 <select class="form-control" id="gender" name="gender" required>
-                                                    <option value="male" {{ $student->gender === 'male' ? 'selected' : '' }}>Male</option>
-                                                    <option value="female" {{ $student->gender === 'female' ? 'selected' : '' }}>Female</option>
+                                                    <option value="ذكر" {{ $student->gender === 'ذكر' ? 'selected' : '' }}>ذكر</option>
+                                                    <option value="أنثى" {{ $student->gender === 'أنثى' ? 'selected' : '' }}>أنثى</option>
                                                 </select>
                                             </div>
                                             <div class="form-group">
@@ -65,11 +65,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="phone_number">رقم الهاتف </label>
-                                        <input type="text" class="form-control" id="phone_number" name="phone_number" value="{{ $student->phone_number }}" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="email">الايميل </label>
-                                        <input type="text" class="form-control" id="email" name="email" value="{{ $student->email }}" required>
+                                        <input type="text" class="form-control" id="phone_number" name="phone_number" value="{{ $student->phone_number }}">
                                     </div>
                                 </div>
                             </div>  

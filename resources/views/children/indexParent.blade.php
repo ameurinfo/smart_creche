@@ -8,26 +8,13 @@
 
 <div class="container-fluid">
     <div class="row">
-        <div class="col-lg-12 margin-tb mb-4">
-            <div class="pull-left">
-                <h2>متابعة اﻷطفال</h2>
-            </div>
-        </div>
-    </div>
-    <div class="row">
         <div class="col-md-12">
             <div class="card card-primary card-outline">
                 <div class="card-header">
                     <h5>
                     <i class="fas fa-list"></i>
                     <span class="float-end">قائمة اﻷطفال</span>
-
                     </h5>
-                    <div class="float-end">
-                        @can('children_create')
-                            <a class="btn btn-sm btn-success" href="{{ route('children.create') }}"><i class="fas fa-plus-circle"></i> إضافة طفل جديد</a>
-                        @endcan
-                    </div>
                     @if (session('success'))
                         <div class="alert alert-success">
                             {{ session('success') }}
@@ -53,14 +40,12 @@
                                     <td>{{ $student->gender }}</td>
                                     <td>
                                         <a href="{{ route('children.show', $student) }}" class="btn btn-sm btn-primary"><i class="fas fa-eye"></i></a>
-                                        @unless(Auth::user()->hasRole('parents'))
                                         <a href="{{ route('children.edit', $student) }}" class="btn btn-sm btn-secondary"><i class="fas fa-edit"></i></a>
                                         <form action="{{ route('children.destroy', $student) }}" method="POST" style="display: inline;">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></button>
                                         </form>
-                                        @endunless
                                     </td>
                                 </tr>
                             @endforeach

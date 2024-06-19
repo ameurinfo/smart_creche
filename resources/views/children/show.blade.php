@@ -3,12 +3,23 @@
 @section('content')
     <div class="container-fluid">
         <div class="row">
+            <div class="col-lg-12 margin-tb mb-4">
+                <div class="pull-left">
+                    <h2>عرض تفاصيل بيانات الطفل</h2>
+                </div>
+            </div>
+        </div>
+        <div class="row">
             <div class="col-md-3">
                 <div class="card card-primary card-outline">
                     <div class="card-body box-profile">
                         <div class="text-center">
                             <img class="profile-user-img img-fluid img-circle"
-                                src="{{ $student->image ? asset('storage/' . $student->image) : asset('backend/dist/img/user4-128x128.jpg') }}" alt="{{ $student->name }}"
+                                @if($student->gender == 'ذكر')
+                                src="{{ $student->image ? asset('storage/' . $student->image) : asset('backend/dist/img/avatar10.jpg') }}" alt="{{ $student->name }}"
+                                @else
+                                src="{{ $student->image ? asset('storage/' . $student->image) : asset('backend/dist/img/avatar12.png') }}" alt="{{ $student->name }}"
+                                @endif
                                 alt="User profile picture">
                         </div>
 
@@ -21,9 +32,9 @@
                             <li class="list-group-item">
                                 <b>تاريخ التسجيل</b> <a class="float-right">{{ $student->created_at->format('Y.m.d')}}</a>
                             </li>
-                            
+                            @unless(Auth::user()->hasRole('parents'))
                                 <a href="{{ route('children.edit', $student) }}" class="btn btn-sm btn-primary"><i class="fas fa-edit"></i></a>
-                            
+                            @endunless
                         </ul>
                     </div>
                 </div>
@@ -67,7 +78,13 @@
                                         </dl>
                                     </div>
                                     <div class="col-md-4">
-                                        <img src="{{ $student->image ? asset('storage/' . $student->image) : asset('backend/dist/img/user4-128x128.jpg') }}" alt="{{ $student->name }}" class="img-thumbnail" style="max-width: 200px; max-height: 300px;">
+                                        <img 
+                                        @if($student->gender == 'ذكر')
+                                        src="{{ $student->image ? asset('storage/' . $student->image) : asset('backend/dist/img/avatar10.jpg') }}" alt="{{ $student->name }}"
+                                        @else
+                                        src="{{ $student->image ? asset('storage/' . $student->image) : asset('backend/dist/img/avatar12.png') }}" alt="{{ $student->name }}"
+                                        @endif
+                                        alt="{{ $student->name }}" class="img-thumbnail" style="max-width: 200px; max-height: 300px;">
                                     </div>
                                 </div>
                             </div>

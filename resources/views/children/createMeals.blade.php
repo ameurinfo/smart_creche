@@ -44,10 +44,11 @@
                             </tbody>
                         </table>
                     @endif
-
+                    @unless(Auth::user()->hasRole('parents'))
                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addMealModal">
                         <i class="fas fa-plus"></i> إضافة وجبة جديدة
                     </button>
+                    @endunless
                 </div>
             </div>
         </div>

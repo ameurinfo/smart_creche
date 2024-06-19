@@ -15,14 +15,14 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->date('birthdate');
-            $table->enum('gender', ['male', 'female']);
+            $table->enum('gender', ['ذكر', 'أنثى']);
             $table->string('address')->nullable();
             $table->string('phone_number')->nullable();
-            $table->string('email')->unique()->nullable();
+            
             $table->string('image')->nullable(); 
             $table->text('notes')->nullable(); 
-            $table->unsignedBigInteger('parent_id'); 
-            $table->foreign('parent_id')->references('id')->on('parents');
+            $table->unsignedBigInteger('parents_id'); 
+            $table->foreign('parents_id')->references('id')->on('parents');
             $table->timestamps();
 
         });

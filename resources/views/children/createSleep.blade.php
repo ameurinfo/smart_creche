@@ -44,10 +44,11 @@
                             </tbody>
                         </table>
                     @endif
-
+                    @unless(Auth::user()->hasRole('parents'))
                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addSleepModal">
                         <i class="fas fa-plus"></i> إضافة حصة نوم جديدة
                     </button>
+                    @endunless
                 </div>
             </div>
         </div>

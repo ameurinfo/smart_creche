@@ -1,9 +1,13 @@
 @extends('layouts.auth')
 
 @section('content')
-<div class="card card-outline card-primary">
+<div class="card card-outline card-success">
     <div class="card-header text-center">
-        <a href="{{ url('/') }}" class="h1"><b> Smart Creche</b></a>
+        {{-- <a href="{{ url('/') }}" class="h1"><b> Smart Creche</b></a> --}}
+        <a href="{{route('children.index')}}" class="brand-link">
+            <img src="{{asset('backend/dist/img/logo.ico')}}" alt="SMART C Logo" style="width: 50%" 
+                 style="opacity: .8">
+          </a>
     </div>
     <div class="card-body">
         <p class="login-box-msg">تسجيل الدخول لبدء جلسة العمل</p>

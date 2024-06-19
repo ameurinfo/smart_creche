@@ -10,6 +10,9 @@ use App\Models\Attendance;
 use App\Models\Meal;
 use App\Models\Sleep;
 use Carbon\Carbon;
+use App\Models\User;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 
 class ChildrenController extends Controller
 {
@@ -20,6 +23,13 @@ class ChildrenController extends Controller
     {
         $active_menu = 'children.';
         $active_supmenu = 'children.index';
+        if(Auth::user()->hasRole('parents')) 
+        {
+            $parent = Auth::user()->parent;
+            $students = $parent->children;
+            return view('children.index',compact('students','active_menu','active_supmenu'));
+
+        }
         $students = Child::all();
         return view('children.index',compact('students','active_menu','active_supmenu'));
     }
@@ -45,24 +55,24 @@ class ChildrenController extends Controller
             'name' => 'required',
             'birthdate' => 'required|date',
             'gender' => 'required',
-            'parent_id' => 'required|exists:parents,id',
+            'parents_id' => 'required|exists:parents,id', // Make parent_id nullable
             'address' => 'nullable|string',
             'phone_number' => 'nullable|string',
-            'email' => 'nullable|email',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
-
+    
+    
         if ($request->hasFile('image')) {
             $fileNameToStore = $this->storeImage($request->file('image'));
             $validatedData['image'] = $fileNameToStore;
         }
-
+    
         $child = Child::create($validatedData);
-        $child->parents()->associate($validatedData['parent_id']);
+        $child->parents()->associate($validatedData['parents_id']);
         $child->save();
-
+    
         return redirect()->route('children.index')->with('success', 'Child created successfully!');
-
+    
     }
 
     /**
@@ -105,7 +115,6 @@ class ChildrenController extends Controller
             'parent_id' => 'required|exists:parents,id',
             'address' => 'nullable|string',
             'phone_number' => 'nullable|string',
-            'email' => 'nullable|email',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
@@ -244,5 +253,18 @@ class ChildrenController extends Controller
         $imagePath = $image->storeAs('images', $fileNameToStore, 'public');
 
         return $imagePath;
+    }
+
+    /**
+     * Generate a random password.
+     */
+    private function generateRandomPassword($length = 8)
+    {
+        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $password = '';
+        for ($i = 0; $i < $length; $i++) {
+            $password .= $characters[rand(0, strlen($characters) - 1)];
+        }
+        return $password;
     }
 }

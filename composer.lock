@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "0b1f6feb382b645692ec1d6bb7ba54e2",
+    "content-hash": "59f02a898e0f0842224c243a697ea319",
     "packages": [
         {
             "name": "ab-alselwi/laravel-arabic-html",

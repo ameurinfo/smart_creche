@@ -17,7 +17,7 @@ return new class extends Migration
             $table->unsignedBigInteger('child_id')->nullable();
             $table->foreign('child_id')->references('id')->on('children');
             $table->unsignedBigInteger('staff_id')->nullable(); 
-            $table->foreign('staff_id')->references('id')->on('staff');
+            $table->foreign('staff_id')->references('id')->on('staff')->onDelete('cascade');;
             $table->time('arrival_time')->nullable(); 
             $table->time('departure_time')->nullable(); 
             $table->text('notes')->nullable(); 

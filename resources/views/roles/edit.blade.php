@@ -1,19 +1,16 @@
 @extends('layout-app.base')
 
-
 @section('content')
-    <div class="row">
-        <div class="col-lg-12 margin-tb">
-            <div class="pull-left">
-                <h2>Edit Role
-                    <div class="float-end">
-                        <a class="btn btn-primary" href="{{ route('roles.index') }}"> Back</a>
-                    </div>
-                </h2>
+<div class="row">
+    <div class="col-lg-12 margin-tb mb-4">
+        <div class="pull-left">
+            <h2>تعديل المهمة </h2>
+            <div class="float-end">
+                <a class="btn btn-primary" href="{{ route('roles.index') }}"> رجوع</a>
             </div>
         </div>
     </div>
-
+</div>
 
     @if (count($errors) > 0)
         <div class="alert alert-danger">
@@ -26,34 +23,41 @@
         </div>
     @endif
 
-    <form action="{{ route('roles.update', $role->id) }}" method="PATCH">
+    <form action="{{ route('roles.update', $role->id) }}" method="POST">
         @csrf
+        @method('PATCH')
         <div class="row">
-            <div class="col-xs-12 mb-3">
+            <div class="col-md-6 mb-3">
                 <div class="form-group">
-                    <strong>Name:</strong>
-                    <input type="text" value="{{ $role->name }}" name="name" class="form-control"
-                        placeholder="Name">
+                    <strong>المهمة :</strong>
+                    <input type="text" value="{{ $role->name }}" name="name" class="form-control" placeholder="Name">
                 </div>
             </div>
-            <div class="col-xs-12 mb-3">
+            <div class="col-md-12">
                 <div class="form-group">
-                    <strong>Permission:</strong>
+                    <strong>التراخيص المتعلقة بها:</strong>
                     <br />
-                    @foreach ($permission as $value)
-                        <label>
-                            <input type="checkbox" @if (in_array($value->id, $rolePermissions)) checked @endif name="permission[]"
-                                value="{{ $value->id }}" class="name">
-                            {{ $value->name }}</label>
-                        <br />
-                    @endforeach
+                    <div class="row">
+                        @php
+                            $chunks = $permission->chunk(10);
+                        @endphp
+                        @foreach ($chunks as $chunk)
+                            <div class="col-md-4">
+                                @foreach ($chunk as $value)
+                                    <div class="form-check">
+                                        <input type="checkbox" class="form-check-input" name="permission[]" value="{{ $value->id }}"
+                                            @if (in_array($value->id, $rolePermissions)) checked @endif>
+                                        <label class="form-check-label">{{ $value->name }}</label>
+                                    </div>
+                                @endforeach
+                            </div>
+                        @endforeach
+                    </div>
                 </div>
             </div>
-            <div class="col-xs-12 mb-3 text-center">
-                <button type="submit" class="btn btn-primary">Submit</button>
+            <div class="col-md-12 text-center">
+                <button type="submit" class="btn btn-primary">حفظ</button>
             </div>
         </div>
     </form>
-
-
 @endsection

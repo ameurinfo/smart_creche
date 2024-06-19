@@ -50,7 +50,7 @@
     </header>
 
     <h1>تتبع الحضور</h1>
-    <h3>اسم الطفل: {{ $currentStudent->name }}</h3>
+    <h3>اسم الطفل: {{ $student->name }}</h3>
     <h3>السنة: {{ $currentYear }}</h3>
     @php
         \Carbon\Carbon::setLocale('ar');
@@ -73,13 +73,13 @@
                 @for ($day = 1; $day <= $daysInMonth; $day++)
                     @if (!\Carbon\Carbon::create($currentYear, $month, $day)->isWeekend())
                         <td @php $date = \Carbon\Carbon::create($currentYear, $month, $day)->format('Y-m-d'); @endphp
-                            @if (in_array($date, $currentStudent->presentDates))
+                            @if (in_array($date, $student->presentDates))
                             class="present"
-                            @elseif (in_array($date, $currentStudent->absentDates))
+                            @elseif (in_array($date, $student->absentDates))
                             class="absent"
                             @endif
                         >
-                            @if (in_array($date, $currentStudent->presentDates))
+                            @if (in_array($date, $student->presentDates))
                                 X
                             @endif
                         </td>
@@ -88,7 +88,7 @@
             </tr>
         </table>
         @php
-            $monthPresentDays = count(array_filter($currentStudent->presentDates, function ($date) use ($currentYear, $month) {
+            $monthPresentDays = count(array_filter($student->presentDates, function ($date) use ($currentYear, $month) {
                 return \Carbon\Carbon::parse($date)->year == $currentYear && \Carbon\Carbon::parse($date)->month == $month;
             }));
             $totalPresentDays += $monthPresentDays;

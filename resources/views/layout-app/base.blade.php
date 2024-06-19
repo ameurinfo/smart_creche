@@ -4,7 +4,9 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>تسيير الحضانة</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="csrf-token" content="{{ csrf_token() }}">
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+  <link rel="icon" href="{{asset('backend/dist/img/logo.ico')}}" type="image/x-icon">
   <link rel="stylesheet" href="{{asset('backend/plugins/fontawesome-free/css/all.min.css')}}">
   <link rel="stylesheet" href="{{asset('backend/dist/css/adminlte.min.css')}}">
 
@@ -20,7 +22,6 @@
   @include('layout-app.navbar')
   @include('layout-app.sidebar')
   <div class="content-wrapper">
-    @include('layout-app.headercontentpage')
     <div class="content">
       @yield('content')
     </div>

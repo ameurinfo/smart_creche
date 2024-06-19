@@ -18,6 +18,11 @@ return new class extends Migration
             $table->string('phone_number');
             $table->string('email')->unique()->nullable();
             $table->string('job')->nullable(); 
+            $table->string('image')->nullable(); 
+            
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+
             $table->timestamps();
 
         });

@@ -9,6 +9,8 @@ use Spatie\Permission\Models\Role;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use App\Models\Parents;
+use Illuminate\Support\Str;
 
 class UserController extends Controller
 {
@@ -34,7 +36,8 @@ class UserController extends Controller
             'name' => 'required',
             'email' => 'required|email|unique:users,email',
             'password' => 'required|same:confirm-password',
-            'roles' => 'required'
+            'roles' => 'required',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
     
         $input = $request->all();
@@ -72,7 +75,8 @@ class UserController extends Controller
             'name' => 'required',
             'email' => 'required|email|unique:users,email,'.$id,
             'password' => 'same:confirm-password',
-            'roles' => 'required'
+            'roles' => 'required',
+            
         ]);
     
         $input = $request->all();
@@ -97,5 +101,45 @@ class UserController extends Controller
         User::find($id)->delete();
         return redirect()->route('users.index')
                         ->with('success','User deleted successfully');
+    }
+
+    public function newParent(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'relationship' => 'required|string|max:255',
+            'job' => 'nullable|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users,email',
+            'phone_number' => 'required|string|max:20',
+        ]);
+
+        // Generate a random password
+        $password = Str::random(8);
+
+        // Create the user
+        $user = User::create([
+            'name' => $request->input('name'),
+            'email' => $request->input('email'),
+            'password' => Hash::make($password),
+        ]);
+
+        // Assign the parent role to the user
+        $user->assignRole('parents');
+
+        // Create the parent
+        $parent = Parents::create([
+            'name' => $request->input('name'),
+            'email' => $request->input('email'),
+            'phone_number' => $request->input('phone_number'),
+            'relationship' => $request->input('relationship'),
+            'job' => $request->input('job'),
+            'user_id' => $user->id,
+        ]);
+
+        // Return the new parent data as JSON
+        return response()->json([
+            'id' => $parent->id,
+            'name' => $parent->name,
+        ]);
     }
 }

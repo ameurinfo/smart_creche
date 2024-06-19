@@ -8,6 +8,8 @@ use App\Http\Controllers\StaffController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VideoChatController;
+use App\Http\Controllers\NotificationController;
+use App\Http\Controllers\ProfilesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,18 +23,18 @@ use App\Http\Controllers\VideoChatController;
 */
 
  Route::get('/', function () {
-    return view('welcome');
+    return redirect('login');
 }); 
-
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     
+    Route::get('/profiles', [ProfilesController::class, 'show'])->name('profiles.show');
+    Route::patch('/profiles/{id}', [ProfilesController::class, 'update'])->name('profiles.update');
+    Route::patch('/profilesImage/{id}', [ProfilesController::class, 'updateImage'])->name('profiles.updateImage');
+
     Route::get('/video-chat', function () {
         $active_menu = '';
         $active_supmenu = '';
@@ -42,6 +44,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('roles', RoleController::class);
 
     // users routes
+    Route::post('parents/storeAjax', [UserController::class, 'newParent'])->name('parents.storeAjax');
     Route::resource('users', UserController::class);
 
     // children routes
@@ -62,7 +65,10 @@ Route::middleware('auth')->group(function () {
     Route::post('upload-image', [AttendanceController::class,'storageImage'])->name('attendance.storeimage');
 
     Route::resource('staff', StaffController::class);
-    
+
+    // notifications routes
+    Route::get('/notifications', [NotificationController::class, 'index'])->name('notifications.index');
+    Route::get('/notifications/markAsRead/{id}', [NotificationController::class, 'markAsRead'])->name('notifications.markAsRead');
 });
 
 /* Route::get('/video-chat', [VideoChatController::class,'index'])->name('video-chat');

@@ -1,21 +1,20 @@
 @extends('layout-app.base')
 
 @section('content')
-    <div class="row">
-        <div class="col-lg-12 margin-tb mb-4">
-            <div class="pull-left">
-                <h2>Create New Role
-                    <div class="float-end">
-                        <a class="btn btn-primary" href="{{ route('roles.index') }}"> Back</a>
-                    </div>
-                </h2>
+<div class="row">
+    <div class="col-lg-12 margin-tb mb-4">
+        <div class="pull-left">
+            <h2>إضافة مهمة جديدة</h2>
+            <div class="float-end">
+                <a class="btn btn-primary" href="{{ route('roles.index') }}">رجوع</a>
             </div>
         </div>
     </div>
+</div>
 
-    @if (count($errors) > 0)
+    @if ($errors->any())
         <div class="alert alert-danger">
-            <strong>Whoops!</strong> There were some problems with your input.<br><br>
+            <strong>Whoops!</strong> There were some problems with your input.
             <ul>
                 @foreach ($errors->all() as $error)
                     <li>{{ $error }}</li>
@@ -24,30 +23,33 @@
         </div>
     @endif
 
-    <form action="{{ route('roles.store') }}" method="POST">
-        @csrf
-        <div class="row">
-            <div class="col-xs-12 col-sm-12 col-md-12">
+    <div class="card">
+        <div class="card-body">
+            <form action="{{ route('roles.store') }}" method="POST">
+                @csrf
                 <div class="form-group">
-                    <strong>Name:</strong>
+                    <label for="name"><strong>المهمة:</strong></label>
                     <input type="text" name="name" class="form-control" placeholder="Name">
                 </div>
-            </div>
-            <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
-                    <strong>Permission:</strong>
-                    <br />
-                    @foreach ($permission as $value)
-                        <label>
-                            <input type="checkbox" name="permission[]" value="{{ $value->id }}" class="name">
-                            {{ $value->name }}</label>
-                        <br />
-                    @endforeach
+                    <label for="permissions"><strong>التراخيص المتعلق بها:</strong></label>
+                    <div class="row">
+                        @foreach ($permission->chunk(10) as $chunk)
+                            <div class="col-md-4">
+                                @foreach ($chunk as $value)
+                                    <div class="form-check">
+                                        <input type="checkbox" name="permission[]" value="{{ $value->id }}" class="form-check-input">
+                                        <label class="form-check-label">{{ $value->name }}</label>
+                                    </div>
+                                @endforeach
+                            </div>
+                        @endforeach
+                    </div>
                 </div>
-            </div>
-            <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-                <button type="submit" class="btn btn-primary">Submit</button>
-            </div>
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary">حفظ</button>
+                </div>
+            </form>
         </div>
-    </form>
+    </div>
 @endsection
