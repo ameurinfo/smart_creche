@@ -15,10 +15,13 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('child_id');
             $table->foreign('child_id')->references('id')->on('children'); 
-            $table->date('date'); 
-            $table->text('academic_assessment');
-            $table->text('learning_plan'); 
-            $table->text('progress_notes')->nullable();
+            $table->text('fear')->nullable();
+            $table->text('aggressive_behavior')->nullable();
+            $table->text('feeding')->nullable();
+            $table->text('sleep')->nullable();
+            $table->text('involuntary_urination')->nullable();
+            $table->text('jealousy')->nullable();
+            $table->integer('overall_rating')->nullable();
             $table->timestamps();
         });
     }

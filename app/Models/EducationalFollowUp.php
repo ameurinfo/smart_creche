@@ -10,11 +10,7 @@ class EducationalFollowUp extends Model
     use HasFactory;
     
     protected $fillable = [
-        'child_id',
-        'date',
-        'academic_assessment',
-        'learning_plan',
-        'progress_notes'
+
     ];
 
 

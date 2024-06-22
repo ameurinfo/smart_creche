@@ -50,6 +50,22 @@ Route::middleware('auth')->group(function () {
     // children routes
     Route::get('/children/meals', [ChildrenController::class, 'createMeals'])->name('children.createMeals');
     Route::post('/children/meals', [ChildrenController::class, 'storeMeals'])->name('children.storeMeals');
+    
+    Route::get('/children/psychologyfollowup', [ChildrenController::class, 'indexPsychologyFollowUp'])->name('children.indexPsychologyFollowUp');
+    Route::get('/children/psychologyfollowup/{id}', [ChildrenController::class, 'showPsychologyFollowUp'])->name('children.showPsychologyFollowUp');
+    Route::get('/children/psychologyfollowup/create/{id}', [ChildrenController::class, 'createPsychologyFollowUp'])->name('children.createPsychologyFollowUp');
+    Route::post('/children/psychologyfollowup/{id}', [ChildrenController::class, 'storePsychologyFollowUp'])->name('children.storePsychologyFollowUp');
+    
+    Route::get('/children/behaviormodification', [ChildrenController::class, 'indexBehaviorModification'])->name('children.indexBehaviorModification');
+    Route::get('/children/behaviormodification/{id}', [ChildrenController::class, 'showBehaviorModification'])->name('children.showBehaviorModification');
+    Route::get('/children/behaviormodification/create/{id}', [ChildrenController::class, 'createBehaviorModification'])->name('children.createBehaviorModification');
+    Route::post('/children/behaviormodification/{id}', [ChildrenController::class, 'storeBehaviorModification'])->name('children.storeBehaviorModification');
+    
+    Route::get('/children/cumulativerecord', [ChildrenController::class, 'indexCumulativeRecord'])->name('children.indexCumulativeRecord');
+    Route::get('/children/cumulativerecord/{id}', [ChildrenController::class, 'showCumulativeRecord'])->name('children.showCumulativeRecord');
+    Route::get('/children/cumulativerecord/create/{id}', [ChildrenController::class, 'createCumulativeRecord'])->name('children.createCumulativeRecord');
+    Route::post('/children/cumulativerecord/{id}', [ChildrenController::class, 'storeCumulativeRecord'])->name('children.storeCumulativeRecord');
+    
     Route::get('/children/sleep', [ChildrenController::class, 'createSleep'])->name('children.createSleep');
     Route::post('/children/sleep', [ChildrenController::class, 'storeSleep'])->name('children.storeSleep');
     Route::resource('children',ChildrenController::class);

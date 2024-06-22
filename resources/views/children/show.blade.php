@@ -178,7 +178,7 @@
 
                                         <div class="time-label">
                                             <span class="bg-warning">
-                                                {{ $item->date }}
+                                                {{ $item->created_at->format('Y-m-d') }}
                                             </span>
                                         </div>
                                         <div>
@@ -189,13 +189,13 @@
                                                 <h3 class="timeline-header">تفصيل المتابعة النفسية</h3>
                                                 <div class="timeline-body">
                                                     <dl>
-                                                        <dt>ملاحظات حول الحالة النفسية </dt>
-                                                        <dd>{{ $item->observations }}</dd>
+                                                        <dt>مزاج الطفل اليومي</dt>
+                                                        <dd>{{ $item->dailyMood }}</dd>
 
                                                     </dl>
                                                     <dl>
-                                                        <dt>خطط الدعم  </dt>
-                                                        <dd>{{ $item->support_plan }}</dd>
+                                                        <dt>سلوكات غير سوية </dt>
+                                                        <dd>{{ $item->abnormalBehaviors }}</dd>
 
                                                     </dl>
                                                 </div>

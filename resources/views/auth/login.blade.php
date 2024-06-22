@@ -5,7 +5,7 @@
     <div class="card-header text-center">
         {{-- <a href="{{ url('/') }}" class="h1"><b> Smart Creche</b></a> --}}
         <a href="{{route('children.index')}}" class="brand-link">
-            <img src="{{asset('backend/dist/img/logo.ico')}}" alt="SMART C Logo" style="width: 50%" 
+            <img src="{{asset('backend/dist/img/smart_logo.png')}}" alt="SMART C Logo" style="width: 50%" 
                  style="opacity: .8">
           </a>
     </div>
@@ -48,13 +48,6 @@
                 </div>
             </div>
         </form>
-
-        <p class="mb-1">
-            <a href="{{ route('password.request') }}">نسيت كلمة المرور</a>
-        </p>
-        <p class="mb-0">
-            <a href="{{ route('register') }}" class="text-center">تسجيل عضو جديد</a>
-        </p>
     </div>
 </div>
 @endsection

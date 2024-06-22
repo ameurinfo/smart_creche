@@ -11,8 +11,7 @@ class PsychologicalFollowUp extends Model
 
     protected $fillable = [
         'child_id',
-        'date',
-        'observations',
-        'support_plan',
+        'dailyMood',
+        'abnormalBehaviors'
     ];
 }

@@ -55,4 +55,9 @@ class Child extends Model
         return $this->hasMany(Sleep::class);
     }
 
+    public function cumulativeRecords()
+    {
+        return $this->hasMany(CumulativeRecord::class);
+    }
+
 }

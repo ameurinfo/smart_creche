@@ -11,6 +11,8 @@ use App\Models\Meal;
 use App\Models\Sleep;
 use Carbon\Carbon;
 use App\Models\User;
+use App\Models\CumulativeRecord;
+use App\Models\PsychologicalFollowUp;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 
@@ -191,6 +193,201 @@ class ChildrenController extends Controller
         }
 
         return redirect()->back()->with('success', 'Meals recorded successfully.');
+    }
+    
+    /**
+     * index the psychology follow up.
+     */
+    
+    public function indexPsychologyFollowUp()
+    {
+        $active_menu = 'health_safty.';
+        $active_supmenu = 'health_safty.psychologyFollowUp';
+        $students = Child::all();
+        return view('children.indexPsychologyFollowUp',compact('students','active_menu','active_supmenu'));
+
+    }
+    /**
+     * show the psychology follow up.
+     */
+    
+    public function showPsychologyFollowUp(string $id)
+    {
+        $active_menu = 'health_safty.';
+        $active_supmenu = 'health_safty.psychologyFollowUp';
+        $student = Child::with(['psychological_follow_up' => function ($query) {
+            $query->orderBy('created_at', 'desc');
+        }])->findOrFail($id);
+        return view('children.showPsychologyFollowUp',compact('student','active_menu','active_supmenu'));
+
+    }
+     /** create the psychology follow up form.
+     */
+    public function createPsychologyFollowUp(string $id)
+    {
+        $active_menu = 'health_safty.';
+        $active_supmenu = 'health_safty.psychologyFollowUp';
+        $student = Child::findOrFail($id);
+        return view('children.createPsychologyFollowUp',compact('student','active_menu','active_supmenu'));
+    }
+    /**
+     * Store the psychology follow up form.
+     */
+    public function storePsychologyFollowUp(Request $request, $id)
+    {
+        $validatedData = $request->validate([
+            'dailyMood' => 'required|string',
+            'abnormalBehaviors' => 'nullable|string'
+        ]);
+        $child = Child::findOrFail($id);
+        $psychologyFollow = new PsychologicalFollowUp($validatedData);
+        $psychologyFollow->child_id = $child->id;
+        $psychologyFollow->save();
+        return redirect()->route('children.indexPsychologyFollowUp')
+                         ->with('success', 'تم إضافة سجل المتابعة النفسية بنجاح!');
+
+    }
+    /**
+     * index the cumulative record form.
+     */
+    public function indexBehaviorModification()
+    {
+        $active_menu = 'health_safty.';
+        $active_supmenu = 'health_safty.behaviorModification';
+        $students = Child::all();
+        return view('children.indexBehaviorModification',compact('students','active_menu','active_supmenu'));
+    }
+    /**
+     * Display the cumulative record form.
+     */
+    public function createBehaviorModification()
+    {
+        $active_menu = 'health_safty.';
+        $active_supmenu = 'health_safty.behaviorModification';
+        return view('children.behaviorModification',compact('active_menu','active_supmenu'));
+    }
+    /**
+     * Store the cumulative record form.
+     */
+    public function storeBehaviorModification(Request $request, $id)
+    {
+        
+    }
+    /**
+     * index the cumulative record form.
+     */
+    public function indexCumulativeRecord()
+    {
+        $active_menu = 'health_safty.';
+        $active_supmenu = 'health_safty.cumulativeRecord';
+        $students = Child::all();
+        return view('children.indexCumulativeRecord',compact('students','active_menu','active_supmenu'));
+
+    }
+    /**
+     * show the cumulative record .
+     */
+    public function showCumulativeRecord(string $id)
+    {
+        $active_menu = 'health_safty.';
+        $active_supmenu = 'health_safty.cumulativeRecord';
+        $student = Child::with(['cumulativeRecords' => function ($query) {
+            $query->orderBy('created_at', 'desc');
+        }])->findOrFail($id);
+
+        return view('children.showCumulativeRecord', compact('student', 'active_menu', 'active_supmenu'));
+    }
+    /**
+     * Display the cumulative record form.
+     */
+    public function createCumulativeRecord(string $id)
+    {
+        $active_menu = 'health_safty.';
+        $active_supmenu = 'health_safty.cumulativeRecord';
+        $student = Child::findOrFail($id);
+
+        return view('children.createCumulativeRecord', compact('student', 'active_menu', 'active_supmenu'));
+    }
+    /**
+     * Store the cumulative record form.
+     */
+    public function storeCumulativeRecord(Request $request, $id)
+    {
+        $validatedData = $request->validate([
+            'age' => 'required|string',
+            'mental_age' => 'nullable|string',
+            'disability' => 'nullable|string',
+            'family_members' => 'nullable|string',
+            'siblings' => 'nullable|string',
+            'parents' => 'nullable|string',
+            'child_order' => 'nullable|string',
+            'living_with' => 'nullable|string',
+            'economic_status' => 'nullable|string',
+            'home_status' => 'nullable|string',
+            'hearing' => 'nullable|string',
+            'vision' => 'nullable|string',
+            'taste' => 'nullable|string',
+            'touch' => 'nullable|string',
+            'speech' => 'nullable|string',
+            'chronic_disease' => 'nullable|string',
+            'intelligence_tests' => 'nullable|string',
+            'special_abilities' => 'nullable|string',
+            'psychological_tests' => 'nullable|string',
+            'cognitive' => 'nullable|array',
+            'cognitive.*' => 'string',
+            'attention_concentration' => 'nullable|string',
+            'memory' => 'nullable|array',
+            'memory.*' => 'string',
+            'eating' => 'nullable|string',
+            'cleanliness' => 'nullable|string',
+            'dressing' => 'nullable|string',
+            'activities' => 'nullable|array',
+            'activities.*' => 'string',
+            'highly_emotional' => 'nullable|string',
+            'introverted' => 'nullable|string',
+        ]);
+    
+        $child = Child::findOrFail($id);
+        $memory = implode(', ', $validatedData['memory']);
+        $cognitive = implode(', ', $validatedData['cognitive']);
+        $activities = implode(', ', $validatedData['activities']);
+
+        $cumulativeRecord = new CumulativeRecord([
+            'age' => $validatedData['age'],
+            'mental_age' => $validatedData['mental_age'],
+            'disability' => $validatedData['disability'],
+            'family_members' => $validatedData['family_members'],
+            'siblings' => $validatedData['siblings'],
+            'parents' => $validatedData['parents'],
+            'child_order' => $validatedData['child_order'],
+            'living_with' => $validatedData['living_with'],
+            'economic_status' => $validatedData['economic_status'],
+            'home_status' => $validatedData['home_status'],
+            'hearing' => $validatedData['hearing'],
+            'vision' => $validatedData['vision'],
+            'taste' => $validatedData['taste'],
+            'touch' => $validatedData['touch'],
+            'speech' => $validatedData['speech'],
+            'chronic_disease' => $validatedData['chronic_disease'],
+            'intelligence_tests' => $validatedData['intelligence_tests'],
+            'special_abilities' => $validatedData['special_abilities'],
+            'psychological_tests' => $validatedData['psychological_tests'],
+            'cognitive' => $cognitive,
+            'attention_concentration' => $validatedData['attention_concentration'],
+            'memory' => $memory,
+            'eating' => $validatedData['eating'],
+            'cleanliness' => $validatedData['cleanliness'],
+            'dressing' => $validatedData['dressing'],
+            'activities' => $activities,
+            'highly_emotional' => $validatedData['highly_emotional'],
+            'introverted' => $validatedData['introverted'],
+        ]);
+    
+        $cumulativeRecord->child_id = $child->id; 
+        $cumulativeRecord->save();
+
+        return redirect()->route('children.indexCumulativeRecord')
+                         ->with('success', 'تم إضافة السجل التراكمي بنجاح!');
     }
 
     /**

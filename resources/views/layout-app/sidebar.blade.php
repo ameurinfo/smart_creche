@@ -1,6 +1,6 @@
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <a href="{{route('children.index')}}" class="brand-link">
-      <img src="{{asset('backend/dist/img/logo.ico')}}" alt="SMART C Logo" class="brand-image img-circle elevation-3"
+      <img src="{{asset('backend/dist/img/smart_logo.png')}}" alt="SMART C Logo" class="brand-image img-circle elevation-3"
            style="opacity: .8">
       <span class="brand-text font-weight-light">SMARTC</span>
     </a>
@@ -49,6 +49,14 @@
                   <p> المغادرة</p>
                 </a>
               </li>
+              @endcan
+              @can('communicate_with_child')
+                <li class="nav-item">
+                  <a href="{{route('video-chat')}}" class="nav-link {{ $active_supmenu === 'attendance.create' ? 'active' : '' }}">
+                    <i class="fa fa-phone nav-icon"></i>
+                    <p>أتواصل مع طفلي</p>
+                  </a>
+                </li>
               @endcan
               @can('attendance_tracking')
               <li class="nav-item">
@@ -105,9 +113,9 @@
             @endcan
             </ul>
           </li>
-          <li class="nav-item has-treeview {{ $active_menu === 'children' ? 'menu-open' : '' }}">
+          <li class="nav-item has-treeview {{ $active_menu === 'health_safty.' ? 'menu-open' : '' }}">
           @can('health_safety')
-            <a href="#" class="nav-link {{ $active_menu === 'children' ? 'active' : '' }}">
+            <a href="#" class="nav-link {{ $active_menu === 'health_safty.' ? 'active' : '' }}">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
                  الصحة والسلامة
@@ -126,9 +134,25 @@
             @endcan
             @can('cumulative_record')
             <li class="nav-item">
-              <a href="#" class="nav-link {{ $active_supmenu === 'attendance.departure' ? 'active' : '' }}">
+              <a href="{{route('children.indexCumulativeRecord')}}" class="nav-link {{ $active_supmenu === 'health_safty.cumulativeRecord' ? 'active' : '' }}">
                 <i class="fas fa-tasks nav-icon"></i>
                 <p>السجل التراكمي </p>
+              </a>
+            </li>
+            @endcan
+            @can('psychology_follow_up')
+            <li class="nav-item">
+              <a href="{{route('children.indexPsychologyFollowUp')}}" class="nav-link {{ $active_supmenu === 'health_safty.psychologyFollowUp' ? 'active' : '' }}">
+                <i class="fas fa-tasks nav-icon"></i>
+                <p> المتابعة النفسية </p>
+              </a>
+            </li>
+            @endcan
+            @can('behavior_modification')
+            <li class="nav-item">
+              <a href="{{route('children.indexBehaviorModification')}}" class="nav-link {{ $active_supmenu === 'health_safty.behaviorModification' ? 'active' : '' }}">
+                <i class="fas fa-tasks nav-icon"></i>
+                <p>تربية وتعديل السلوك </p>
               </a>
             </li>
             @endcan
@@ -137,14 +161,6 @@
                 <a href="#" class="nav-link {{ $active_supmenu === 'attendance.create' ? 'active' : '' }}">
                   <i class="fa fa-book-open nav-icon"></i>
                   <p>إدارة الحوادث </p>
-                </a>
-              </li>
-            @endcan
-            @can('communicate_with_child')
-              <li class="nav-item">
-                <a href="{{route('video-chat')}}" class="nav-link {{ $active_supmenu === 'attendance.create' ? 'active' : '' }}">
-                  <i class="fa fa-book-open nav-icon"></i>
-                  <p>أتواصل مع طفلي</p>
                 </a>
               </li>
             @endcan

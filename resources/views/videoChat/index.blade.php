@@ -1,4 +1,5 @@
 @extends('layout-app.base')
+<script src="https://webrtc.github.io/adapter/adapter-latest.js"></script>
 <link rel="stylesheet" type="text/css" href="{{asset('backend/dist/css/main.css')}}" media="screen">
 @section('content')
 <div class="row">

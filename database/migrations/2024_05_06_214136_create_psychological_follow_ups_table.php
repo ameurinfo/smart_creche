@@ -15,9 +15,8 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('child_id'); 
             $table->foreign('child_id')->references('id')->on('children'); 
-            $table->date('date'); 
-            $table->text('observations'); 
-            $table->text('support_plan')->nullable(); 
+            $table->string('dailyMood')->nullable();  
+            $table->string('abnormalBehaviors')->nullable(); 
             $table->timestamps();
         });
     }
