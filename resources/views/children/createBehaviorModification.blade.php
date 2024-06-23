@@ -15,7 +15,7 @@
 </div>
 @endif
 
-<form action="{{ route('children.behaviorModification') }}" method="POST">
+<form action="{{ route('children.storeBehaviorModification', $student->id) }}" method="POST">
     @csrf
     <div class="card">
         <div class="card-header">
@@ -25,7 +25,7 @@
             @foreach(['الخوف', 'السلوك العدواني', 'التغذية', 'النوم', 'التبول اللاإرادي', 'الغيرة'] as $index => $behavior)
              <div class="form-group">
                     <label for="behavior{{ $index + 1 }}">{{ $behavior }}</label>
-                    <input type="text" class="form-control" id="behavior{{ $index + 1 }}" name="behavior[]" value="{{ $behavior }}">
+                    <input type="text" class="form-control" id="behavior{{ $index + 1 }}" name="behavior[]" placeholder="{{ $behavior }}">
                 </div>
                 @endforeach
             </div>

@@ -9,9 +9,16 @@ class EducationalFollowUp extends Model
 {
     use HasFactory;
     
-    protected $fillable = [
+    protected $fillable = ['behaviors', 'overall_rating'];
 
+    protected $casts = [
+        'behaviors' => 'array',
     ];
+
+    public function child()
+    {
+        return $this->belongsTo(Child::class);
+    }
 
 
 }

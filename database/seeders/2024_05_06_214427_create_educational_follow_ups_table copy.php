@@ -13,9 +13,15 @@ return new class extends Migration
     {
         Schema::create('educational_follow_ups', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('child_id')->constrained()->onDelete('cascade');
-            $table->json('behaviors');
-            $table->integer('overall_rating');
+            $table->unsignedBigInteger('child_id');
+            $table->foreign('child_id')->references('id')->on('children'); 
+            $table->text('fear')->nullable();
+            $table->text('aggressive_behavior')->nullable();
+            $table->text('feeding')->nullable();
+            $table->text('sleep')->nullable();
+            $table->text('involuntary_urination')->nullable();
+            $table->text('jealousy')->nullable();
+            $table->integer('overall_rating')->nullable();
             $table->timestamps();
         });
     }

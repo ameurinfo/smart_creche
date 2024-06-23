@@ -258,20 +258,46 @@ class ChildrenController extends Controller
         return view('children.indexBehaviorModification',compact('students','active_menu','active_supmenu'));
     }
     /**
-     * Display the cumulative record form.
+     * show the cumulative record form.
      */
-    public function createBehaviorModification()
+    public function showBehaviorModification(string $id)
     {
         $active_menu = 'health_safty.';
         $active_supmenu = 'health_safty.behaviorModification';
-        return view('children.behaviorModification',compact('active_menu','active_supmenu'));
+        $student = Child::findOrFail($id);
+        $behaviorModification = $student->educational_follow_up()->latest()->first();
+        return view('children.showBehaviorModification',compact('student','behaviorModification','active_menu','active_supmenu'));
+    }
+    /**
+     * Display the cumulative record form.
+     */
+    public function createBehaviorModification(string $id)
+    {
+        $active_menu = 'health_safty.';
+        $active_supmenu = 'health_safty.behaviorModification';
+        $student = Child::findOrFail($id);
+        return view('children.createBehaviorModification',compact('student','active_menu','active_supmenu'));
     }
     /**
      * Store the cumulative record form.
      */
     public function storeBehaviorModification(Request $request, $id)
     {
-        
+        // Validate the request data
+        $request->validate([
+            'behavior' => 'required|array',
+            'behavior.*' => 'string|max:255',
+            'overall_rating' => 'required|integer|between:0,9',
+        ]);
+        // Save the behavior modification data
+        $behaviorData = [
+            'behaviors' => $request->input('behavior'),
+            'overall_rating' => $request->input('overall_rating'),
+        ];
+        $student = Child::findOrFail($id);
+        $student->educational_follow_up()->create($behaviorData);
+        return redirect()->route('children.indexBehaviorModification')
+                         ->with('success', 'تم إضافة سجل بنجاح.');
     }
     /**
      * index the cumulative record form.
