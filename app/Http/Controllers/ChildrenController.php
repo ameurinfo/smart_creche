@@ -85,7 +85,7 @@ class ChildrenController extends Controller
         $active_menu = 'children.';
         $active_supmenu = 'children.index';
         $student = Child::with(['educational_follow_up' => function ($query) {
-            $query->orderBy('date', 'desc');
+            $query->orderBy('created_at', 'desc');
         }])->find($id);
        
         return view('children.show', compact('student','active_menu','active_supmenu'));
