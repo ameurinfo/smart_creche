@@ -35,6 +35,8 @@ class RolesAndPermissionsSeeder extends Seeder
         'health_safety',
         'health_records',
         'cumulative_record',
+        'behavior_modification',
+        'psychology_follow_up',
         'incident_management',
         'communicate_with_child',
         'staff_management',
